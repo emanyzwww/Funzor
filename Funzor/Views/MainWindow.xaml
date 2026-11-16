@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Window
     x:Class="Funzor.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:l="using:WinUI3Localizer"
     Title="Funzor">
-    <Grid
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource Surface.Canvas.Background}">
+
         <Button
             x:Name="UpdateCheckButton"
             l:Uids.Uid="UpdateCheckButton"

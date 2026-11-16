@@ -6,7 +6,7 @@ end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.cs]
+[*.{cs,csproj}]
 tab_width = 4
 indent_style = tab
 

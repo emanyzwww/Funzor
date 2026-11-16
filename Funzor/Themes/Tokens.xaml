@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    原子 Token 层
+
+    本层只定义"值", 不定义"用途":
+    - 色阶以色相命名 (Neutral / Coral / Blue / Green / Amber / Red ...), 不使用 Success / Warning 这类语义名.
+    - 所有色阶共用同一套档位 50-900.
+    - 页面与组件不直接引用本文件的 key, 只引用语义层 (Theme.Light.xaml / Theme.Dark.xaml).
+
+    状态语义到色相的对应, 由语义层落地, 本层只承认色相:
+        成功 Success  -> Green
+        警告 Warn     -> Amber
+        危险 Danger   -> Red
+        信息 Info     -> Blue
+
+    类型约定:
+        Color         只能赋给 Color 属性; Background / Fill / BorderBrush 是 Brush, 由语义层提供.
+        x:Double      只能赋给数值属性; Margin / Padding / BorderThickness 是 Thickness.
+        CornerRadius  赋给 CornerRadius 属性.
+        Thickness     赋给 Margin / Padding / BorderThickness.
+-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        中性色阶: 暖灰
+        命名按 0-1000 递增, 数字越大颜色越深.
+        设计语言以"近黑 + 暖白"为骨架, 避免纯黑纯白造成生硬.
+        0 与 1000 只作为端点, 正文与背景一律使用中间档.
+    -->
+    <Color x:Key="A.Neutral.0">#FFFFFF</Color>
+    <Color x:Key="A.Neutral.50">#FBFAF6</Color>
+    <Color x:Key="A.Neutral.100">#F4F3EE</Color>
+    <Color x:Key="A.Neutral.150">#F0EDE8</Color>
+    <Color x:Key="A.Neutral.200">#EBE8E2</Color>
+    <Color x:Key="A.Neutral.250">#DFDCD5</Color>
+    <Color x:Key="A.Neutral.300">#D3D0C9</Color>
+    <Color x:Key="A.Neutral.350">#C2BFB8</Color>
+    <Color x:Key="A.Neutral.400">#B2AFA7</Color>
+    <Color x:Key="A.Neutral.450">#A09D95</Color>
+    <Color x:Key="A.Neutral.500">#8F8C84</Color>
+    <Color x:Key="A.Neutral.550">#7E7C74</Color>
+    <Color x:Key="A.Neutral.600">#6E6C65</Color>
+    <Color x:Key="A.Neutral.650">#5F5C56</Color>
+    <Color x:Key="A.Neutral.700">#4F4D47</Color>
+    <Color x:Key="A.Neutral.750">#403F39</Color>
+    <Color x:Key="A.Neutral.800">#32312C</Color>
+    <Color x:Key="A.Neutral.850">#262421</Color>
+    <Color x:Key="A.Neutral.900">#1A1916</Color>
+    <Color x:Key="A.Neutral.950">#0E0D0B</Color>
+    <Color x:Key="A.Neutral.1000">#000000</Color>
+
+    <!--
+        品牌色阶
+        品牌色只用于"产品身份 / 重点时刻": 渐变产品卡, 重点数字, 少量强调.
+        不用于正文, 普通按钮或大面积背景.
+    -->
+    <!--
+        珊瑚红: 主品牌色
+        用于清理, 行动, NEW 标记等.
+        注意: 500 对白字的对比度只有 3.28, 所以珊瑚红不做实心按钮底色, 也不做正文.
+        它只用于强调文字, 图标, 渐变与图表.
+    -->
+    <Color x:Key="A.Coral.50">#FFF1ED</Color>
+    <Color x:Key="A.Coral.100">#FFE0D7</Color>
+    <Color x:Key="A.Coral.200">#FFC2B2</Color>
+    <Color x:Key="A.Coral.300">#FF9C82</Color>
+    <Color x:Key="A.Coral.400">#FF6F52</Color>
+    <Color x:Key="A.Coral.500">#FF4F2E</Color>
+    <Color x:Key="A.Coral.600">#E03A1B</Color>
+    <Color x:Key="A.Coral.700">#B82B12</Color>
+    <Color x:Key="A.Coral.800">#8C1F0C</Color>
+    <Color x:Key="A.Coral.900">#5E1408</Color>
+
+    <!--
+        辅助色相
+        洋红: 音频, 媒体.
+        蓝:   网络, 系统, 链接, 焦点.
+        紫:   应用, 隐私, 性能.
+        青:   网格, 数据可视化辅助.
+    -->
+    <Color x:Key="A.Magenta.50">#FDF0F7</Color>
+    <Color x:Key="A.Magenta.100">#FBDCEB</Color>
+    <Color x:Key="A.Magenta.200">#F6B7D6</Color>
+    <Color x:Key="A.Magenta.300">#EF8ABD</Color>
+    <Color x:Key="A.Magenta.400">#EF4BA6</Color>
+    <Color x:Key="A.Magenta.500">#E33D9A</Color>
+    <Color x:Key="A.Magenta.600">#C22480</Color>
+    <Color x:Key="A.Magenta.700">#9C1663</Color>
+    <Color x:Key="A.Magenta.800">#741049</Color>
+    <Color x:Key="A.Magenta.900">#4B0A2F</Color>
+    <Color x:Key="A.Blue.50">#EEF2FF</Color>
+    <Color x:Key="A.Blue.100">#DDE6FF</Color>
+    <Color x:Key="A.Blue.200">#C2D1FF</Color>
+    <Color x:Key="A.Blue.300">#9FB4FF</Color>
+    <Color x:Key="A.Blue.400">#6F8CFF</Color>
+    <Color x:Key="A.Blue.500">#2F5CFF</Color>
+    <Color x:Key="A.Blue.600">#1F43C9</Color>
+    <Color x:Key="A.Blue.700">#16339C</Color>
+    <Color x:Key="A.Blue.800">#102470</Color>
+    <Color x:Key="A.Blue.900">#0A1845</Color>
+    <Color x:Key="A.Purple.50">#F3EFFF</Color>
+    <Color x:Key="A.Purple.100">#E7DCFF</Color>
+    <Color x:Key="A.Purple.200">#D0BDFF</Color>
+    <Color x:Key="A.Purple.300">#B295FF</Color>
+    <Color x:Key="A.Purple.400">#9673FF</Color>
+    <Color x:Key="A.Purple.500">#7A4DFF</Color>
+    <Color x:Key="A.Purple.600">#5C30D6</Color>
+    <Color x:Key="A.Purple.700">#4721A8</Color>
+    <Color x:Key="A.Purple.800">#33167A</Color>
+    <Color x:Key="A.Purple.900">#210E4D</Color>
+    <Color x:Key="A.Cyan.50">#E6FAFD</Color>
+    <Color x:Key="A.Cyan.100">#C2F3F9</Color>
+    <Color x:Key="A.Cyan.200">#8AE8F2</Color>
+    <Color x:Key="A.Cyan.300">#4DD8E8</Color>
+    <Color x:Key="A.Cyan.400">#1AC8DC</Color>
+    <Color x:Key="A.Cyan.500">#00BCD4</Color>
+    <Color x:Key="A.Cyan.600">#0099AD</Color>
+    <Color x:Key="A.Cyan.700">#007586</Color>
+    <Color x:Key="A.Cyan.800">#005460</Color>
+    <Color x:Key="A.Cyan.900">#00343C</Color>
+
+    <!--
+        状态对应的色相
+        语义层引用这几族时, 浅底取 50-200, 实心取 500-600, 文字取 600-700.
+        信息复用辅助色相-蓝
+    -->
+    <!-- 绿: 成功 -->
+    <Color x:Key="A.Green.50">#E8F6EE</Color>
+    <Color x:Key="A.Green.100">#D0EDDD</Color>
+    <Color x:Key="A.Green.200">#A2DBBD</Color>
+    <Color x:Key="A.Green.300">#6FD39C</Color>
+    <Color x:Key="A.Green.400">#3FB379</Color>
+    <Color x:Key="A.Green.500">#177245</Color>
+    <Color x:Key="A.Green.600">#125C38</Color>
+    <Color x:Key="A.Green.700">#0D452A</Color>
+    <Color x:Key="A.Green.800">#0D3423</Color>
+    <Color x:Key="A.Green.900">#12291E</Color>
+
+    <!-- 琥珀: 警告 -->
+    <Color x:Key="A.Amber.50">#FFF3E2</Color>
+    <Color x:Key="A.Amber.100">#FFE6C7</Color>
+    <Color x:Key="A.Amber.200">#FFD08F</Color>
+    <Color x:Key="A.Amber.300">#F7BD6C</Color>
+    <Color x:Key="A.Amber.400">#F0B45E</Color>
+    <Color x:Key="A.Amber.500">#D18A1E</Color>
+    <Color x:Key="A.Amber.600">#9A5B00</Color>
+    <Color x:Key="A.Amber.700">#7A4700</Color>
+    <Color x:Key="A.Amber.800">#573200</Color>
+    <Color x:Key="A.Amber.900">#2C2111</Color>
+
+    <!-- 红: 危险 / 破坏性操作 -->
+    <Color x:Key="A.Red.50">#FDECEC</Color>
+    <Color x:Key="A.Red.100">#FBD9D9</Color>
+    <Color x:Key="A.Red.200">#F5B5B5</Color>
+    <Color x:Key="A.Red.300">#F08A8A</Color>
+    <Color x:Key="A.Red.400">#E56A6A</Color>
+    <Color x:Key="A.Red.500">#CF3F3F</Color>
+    <Color x:Key="A.Red.600">#A72F2F</Color>
+    <Color x:Key="A.Red.700">#802222</Color>
+    <Color x:Key="A.Red.800">#591717</Color>
+    <Color x:Key="A.Red.900">#2E1616</Color>
+
+    <!--
+        叠加层
+        用于悬停 / 按下 / 选中 / 禁用 / 遮罩, 叠在任意底色之上.
+        低档是状态反馈, 64-80 是遮罩与背板. 不用于固定填充.
+    -->
+    <Color x:Key="A.White.A04">#0AFFFFFF</Color>
+    <Color x:Key="A.White.A08">#14FFFFFF</Color>
+    <Color x:Key="A.White.A12">#1FFFFFFF</Color>
+    <Color x:Key="A.White.A16">#29FFFFFF</Color>
+    <Color x:Key="A.White.A24">#3DFFFFFF</Color>
+    <Color x:Key="A.White.A40">#66FFFFFF</Color>
+    <Color x:Key="A.White.A64">#A3FFFFFF</Color>
+    <Color x:Key="A.White.A80">#CCFFFFFF</Color>
+    <Color x:Key="A.Black.A04">#0A000000</Color>
+    <Color x:Key="A.Black.A08">#14000000</Color>
+    <Color x:Key="A.Black.A12">#1F000000</Color>
+    <Color x:Key="A.Black.A16">#29000000</Color>
+    <Color x:Key="A.Black.A24">#3D000000</Color>
+    <Color x:Key="A.Black.A40">#66000000</Color>
+    <Color x:Key="A.Black.A64">#A3000000</Color>
+    <Color x:Key="A.Black.A80">#CC000000</Color>
+
+    <!--
+        间距
+    -->
+    <x:Double x:Key="A.Space.0">0</x:Double>
+    <x:Double x:Key="A.Space.2">2</x:Double>
+    <x:Double x:Key="A.Space.4">4</x:Double>
+    <x:Double x:Key="A.Space.8">8</x:Double>
+    <x:Double x:Key="A.Space.12">12</x:Double>
+    <x:Double x:Key="A.Space.16">16</x:Double>
+    <x:Double x:Key="A.Space.20">20</x:Double>
+    <x:Double x:Key="A.Space.24">24</x:Double>
+    <x:Double x:Key="A.Space.32">32</x:Double>
+    <x:Double x:Key="A.Space.40">40</x:Double>
+    <x:Double x:Key="A.Space.48">48</x:Double>
+    <x:Double x:Key="A.Space.64">64</x:Double>
+    <x:Double x:Key="A.Space.96">96</x:Double>
+
+    <!--
+        内边距与描边
+        间距是数字, 内边距是 Thickness, 两者类型不同不能互用, 因此各留一套.
+    -->
+    <Thickness x:Key="A.Pad.2">2</Thickness>
+    <Thickness x:Key="A.Pad.4">4</Thickness>
+    <Thickness x:Key="A.Pad.8">8</Thickness>
+    <Thickness x:Key="A.Pad.12">12</Thickness>
+    <Thickness x:Key="A.Pad.16">16</Thickness>
+    <Thickness x:Key="A.Pad.20">20</Thickness>
+    <Thickness x:Key="A.Pad.24">24</Thickness>
+    <Thickness x:Key="A.Pad.32">32</Thickness>
+    <Thickness x:Key="A.Stroke.1">1</Thickness>
+    <Thickness x:Key="A.Stroke.2">2</Thickness>
+
+    <!--
+        尺寸
+        只放组件固定尺寸: 图标, 控件高度, 导航栏宽度.
+        窗口与页面的具体宽高属于布局常量, 不进 token 层.
+    -->
+    <x:Double x:Key="A.Size.1">1</x:Double>
+    <x:Double x:Key="A.Size.2">2</x:Double>
+    <x:Double x:Key="A.Size.4">4</x:Double>
+    <x:Double x:Key="A.Size.8">8</x:Double>
+    <x:Double x:Key="A.Size.12">12</x:Double>
+    <x:Double x:Key="A.Size.16">16</x:Double>
+    <x:Double x:Key="A.Size.20">20</x:Double>
+    <x:Double x:Key="A.Size.24">24</x:Double>
+    <x:Double x:Key="A.Size.32">32</x:Double>
+    <x:Double x:Key="A.Size.40">40</x:Double>
+    <x:Double x:Key="A.Size.48">48</x:Double>
+    <x:Double x:Key="A.Size.56">56</x:Double>
+    <x:Double x:Key="A.Size.64">64</x:Double>
+    <x:Double x:Key="A.Size.72">72</x:Double>
+    <x:Double x:Key="A.Size.80">80</x:Double>
+    <x:Double x:Key="A.Size.96">96</x:Double>
+    <x:Double x:Key="A.Size.128">128</x:Double>
+
+    <!--
+        圆角
+        Full 用于胶囊与圆形, 实际取大于等于尺寸一半即可.
+    -->
+    <CornerRadius x:Key="A.Radius.0">0</CornerRadius>
+    <CornerRadius x:Key="A.Radius.2">2</CornerRadius>
+    <CornerRadius x:Key="A.Radius.4">4</CornerRadius>
+    <CornerRadius x:Key="A.Radius.6">6</CornerRadius>
+    <CornerRadius x:Key="A.Radius.8">8</CornerRadius>
+    <CornerRadius x:Key="A.Radius.12">12</CornerRadius>
+    <CornerRadius x:Key="A.Radius.16">16</CornerRadius>
+    <CornerRadius x:Key="A.Radius.20">20</CornerRadius>
+    <CornerRadius x:Key="A.Radius.24">24</CornerRadius>
+    <CornerRadius x:Key="A.Radius.Full">9999</CornerRadius>
+
+    <!--
+        字体
+        8 档, 与 WinUI 默认字号对齐: 12 说明, 14 正文, 20 小节标题, 40 展示数字.
+        中文正文最小 12, 11 只用于角标与单位, 不使用小数档位.
+    -->
+    <x:Double x:Key="A.FontSize.11">11</x:Double>
+    <x:Double x:Key="A.FontSize.12">12</x:Double>
+    <x:Double x:Key="A.FontSize.14">14</x:Double>
+    <x:Double x:Key="A.FontSize.16">16</x:Double>
+    <x:Double x:Key="A.FontSize.20">20</x:Double>
+    <x:Double x:Key="A.FontSize.24">24</x:Double>
+    <x:Double x:Key="A.FontSize.32">32</x:Double>
+    <x:Double x:Key="A.FontSize.40">40</x:Double>
+
+    <!--
+        动效
+        单位: 毫秒. 只给 Composition 与代码侧使用.
+        Storyboard 的 Duration 是 TimeSpan, 需要在代码里换算, 不能直接引用这里的 Double.
+        缓动曲线待定稿后由语义层补齐, 本层只留时长.
+    -->
+    <x:Double x:Key="A.Duration.0">0</x:Double>
+    <x:Double x:Key="A.Duration.100">100</x:Double>
+    <x:Double x:Key="A.Duration.150">150</x:Double>
+    <x:Double x:Key="A.Duration.200">200</x:Double>
+    <x:Double x:Key="A.Duration.300">300</x:Double>
+    <x:Double x:Key="A.Duration.400">400</x:Double>
+</ResourceDictionary>
