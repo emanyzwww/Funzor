@@ -3,7 +3,6 @@
     校验 Funzor 设计系统: 语义层, 视图引用, WinUI 桥接.
 
 .DESCRIPTION
-    对应 docs/design/checklist.md 与 docs/design/design-system.md 的规则.
     只用文本解析, 不依赖第三方库, 不要求 Windows.
     Windows 上本地运行: pwsh scripts/check-design-system.ps1
     CI 中运行:          pwsh scripts/check-design-system.ps1 -Format Text
