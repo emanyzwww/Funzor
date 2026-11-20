@@ -14,7 +14,7 @@
 		<!-- 当前只有中文资源: PRI 工具需要知道默认语言, 避免 PRI257/PRI263 警告 -->
 		<DefaultLanguage>zh-CN</DefaultLanguage>
 		<!-- 本次发版的版本号; CI 会用 /p:Version 覆盖成 tag 上的版本 -->
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
