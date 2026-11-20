@@ -1,3 +1,4 @@
+using Funzor.Helpers;
 using Funzor.Navigation;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -16,6 +17,7 @@ namespace Funzor.Views
 			InitializeComponent();
 
 			ConfigureWindowChrome();
+			WindowMinSize.Attach(this);
 			TitleBar.Attach(AppWindow.Id);
 			TitleBar.MinimizeRequested += TitleBar_MinimizeRequested;
 			TitleBar.CloseRequested += TitleBar_CloseRequested;
