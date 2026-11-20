@@ -9,11 +9,12 @@
 
 仓库已经落地的视觉组件:
 
-- 三栏外壳: 56px 一级导航, 240px 二级菜单, 自适应内容区;
+- 标题栏 + 三栏外壳: 顶部 48px 标题栏, 56px 一级导航, 240px 二级菜单, 自适应内容区;
+- 标题栏: 应用名 + 最小化/关闭两个图标按钮; 空白区可拖动;
 - 一级导航: 图标 + ToolTip, 单选, 无选择指示条;
 - 二级菜单: 标题行 + 可滚动条目列表;
 - 占位页面: 页面标题, 页面描述, 主按钮;
-- 排版样式 5 个, 按钮样式 2 个, 图标模板 1 个.
+- 排版样式 5 个, 按钮样式 2 个, 图标模板 3 个.
 
 有语义键, 但还没有组件实现的: `Card`, `Form`, `Setting`, `Status`, `Dialog`, `ContextMenu`, `Tooltip`, `EmptyState`, 以及
 `Page` 的面包屑与标签页, 幽灵/危险按钮, 开关与选择控件.
@@ -65,16 +66,27 @@
 - 危险操作不要在页面上手写红底; 先补 `Button.Danger` 样式, 再使用;
 - 原生 `Button` 不套样式时, 外观由 Bridge 的 `Button*` 键决定, 等于次按钮观感; 不要把它当主按钮用;
 - 图标按钮需要有可读的 `AutomationProperties.Name` 或 ToolTip.
+- 标题栏的最小化/关闭按钮是外壳局部样式: 32×32, 圆角 6, 只引用 `TitleBar.*`; 不套 Primary/Secondary 变体.
 
 ## 4. 外壳
 
-主窗口固定三列:
+主窗口顶部是 48 高标题栏, 下方固定三列:
 
-| 区域     | 宽度   | 背景                      | 说明                                |
-|----------|--------|---------------------------|-------------------------------------|
-| 一级导航 | 56     | `PrimaryNav.Background`   | 只放分区图标, ToolTip 显示名称      |
-| 二级菜单 | 240    | `SecondaryNav.Background` | 标题行 56 + 条目列表, 右侧 1px 分隔 |
-| 内容区   | 自适应 | `Content.Background`      | `Frame` 承载页面                    |
+| 区域     | 宽度 / 高度 | 背景                      | 说明                                      |
+|----------|-------------|---------------------------|-------------------------------------------|
+| 标题栏   | 跨二级菜单和内容区, 48 高 | `TitleBar.Background`     | 左侧应用名, 右侧最小化/关闭; 空白区拖动   |
+| 一级导航 | 56          | `PrimaryNav.Background`   | 只放分区图标, ToolTip 显示名称; 通高      |
+| 二级菜单 | 240         | `SecondaryNav.Background` | 标题行 56 + 条目列表, 右侧 1px 分隔       |
+| 内容区   | 自适应      | `Content.Background`      | `Frame` 承载页面                          |
+
+标题栏规格:
+
+- 标题栏只覆盖二级菜单和内容区, 一级导航 `Grid.RowSpan=2`, 仍然从窗口顶端到底端;
+- 背景 `TitleBar.Background`, 底部 1px `TitleBar.Separator`;
+- 左侧应用名 `Margin=16,0,0,0`, 使用 `BodyStrongTextBlockStyle` + `TitleBar.Title.Foreground`;
+- 右侧两个 32×32 图标按钮, 间距 8, 右边距 12, 圆角 6; 按钮空白区不参与拖动;
+- 两个按钮使用 `Icon.Minimize` / `Icon.Close`; 图标源是 256 viewBox 的 stroke SVG;
+- 窗口禁用最大化, 不提供全屏; 双击标题栏不会最大化.
 
 一级导航规格:
 
@@ -95,24 +107,24 @@
 交互约定: 当前一级与二级状态只由 `MainWindow` 持有; 子控件的 `SelectSection` / `SelectEntry` 是静默的, 事件只上报用户意图.
 切换一级时默认选中该区第一项; 一级/二级切换不写入返回栈.
 
-外壳里的 56, 240, 40, 8 等数字属于布局结构常量, 允许直接写; 组件内部尺寸优先 token,
+外壳里的 56, 240, 48, 40, 8 等数字属于布局结构常量, 允许直接写; 组件内部尺寸优先 token,
 边界见[原子 Token](tokens.md#7-硬编码尺寸的边界).
 
 ## 5. 图标
 
 图标是 `ControlTemplate`, 不是图片资源:
 
-- 源文件放在 `Funzor/Assets/Icons/Source/`, 当前是 20px 的 SVG;
-- `Icons.xaml` 里一个 `Icon.{名称}` 模板, `Viewbox` 20×20, `Path.Data` 直接使用 SVG 的 path 数据;
-- `Fill` 通过 `TemplateBinding Foreground` 绑定, 颜色由使用方决定;
+- 源文件放在 `Funzor/Assets/Icons/Source/`, 统一使用 256 viewBox;
+- `Icons.xaml` 里一个 `Icon.{名称}` 模板, 根 `Viewbox` 不写固定尺寸, 内部使用 256×256 的坐标空间; 显示尺寸由使用方的 `ContentControl` 决定;
+- fill 图标用 `Fill`, stroke 图标用 `Stroke`, 颜色都通过 `TemplateBinding Foreground` 绑定, 由使用方决定;
 - 导航模型只保存图标 key (`NavSection.IconKey`), 不持有 UI 对象;
 - `ResourceKeyToTemplateConverter` 在应用资源 (含合并字典) 里按 key 取 `ControlTemplate`; key 不存在时返回 `null`,
   图标区为空, 不会抛异常.
 
 新增图标:
 
-1. 准备 20px 的 SVG, 路径与命名放到 `Assets/Icons/Source/`;
-2. 在 `Icons.xaml` 新增 `Icon.{名称}`, 保持 `Viewbox` 20×20;
+1. 准备 256 viewBox 的 SVG, 路径与命名放到 `Assets/Icons/Source/`;
+2. 在 `Icons.xaml` 新增 `Icon.{名称}`, 内部保持 256×256 坐标空间; fill 或 stroke 都可以, 颜色统一走 `Foreground`;
 3. 需要导航入口时, 把 key 写进 `NavigationCatalog`;
 4. 不要在图标的 path 或模板里写死颜色; 选中/未选中只改 `Foreground`.
 

@@ -12,12 +12,12 @@
 | 项 | 数量 |
 | --- | --- |
 | 原子 token | 208 |
-| 语义键 (Light / Dark) | 299 / 299 |
-| 区域 | 15 |
+| 语义键 (Light / Dark) | 306 / 306 |
+| 区域 | 16 |
 | 组件区域 | 4 |
-| 受检 XAML 文件 | 5 (含 Controls.xaml) |
+| 受检 XAML 文件 | 6 (含 Controls.xaml) |
 | 控件样式 | 7 |
-| 图标模板 | 1 |
+| 图标模板 | 3 |
 
 ## 1. 原子 Token
 
@@ -246,6 +246,7 @@
 | 区域 | Owner | Light 键 | Dark 键 |
 | --- | --- | --- | --- |
 | Foundation | 所有视图与原生控件 | 30 | 30 |
+| TitleBar | Views/Shell/TitleBar.xaml | 7 | 7 |
 | PrimaryNav | Views/Shell/NavigationRail.xaml | 22 | 22 |
 | SecondaryNav | Views/Shell/SectionPanel.xaml | 23 | 23 |
 | Content | Views/MainWindow.xaml, Views/Pages/* | 1 | 1 |
@@ -297,6 +298,18 @@
 | <code>Foundation.Accent.On.Foreground</code> | <code>A.Neutral.0</code> #FFFFFF | <code>A.Neutral.900</code> #1A1916 |  |
 | <code>Foundation.Accent.OnDisabled.Foreground</code> | <code>A.Neutral.450</code> #A09D95 | <code>A.Neutral.625</code> #66645E |  |
 | <code>Foundation.Selection.Background</code> | <code>A.Neutral.225</code> #E5E2DC | <code>A.Neutral.750</code> #403F39 |  |
+
+#### TitleBar
+
+| 键 | Light | Dark | 备注 |
+| --- | --- | --- | --- |
+| <code>TitleBar.Background</code> | <code>A.Neutral.50</code> #FBFAF6 | <code>A.Neutral.875</code> #201E1C |  |
+| <code>TitleBar.Separator</code> | <code>A.Neutral.250</code> #DFDCD5 | <code>A.Neutral.800</code> #32312C |  |
+| <code>TitleBar.Title.Foreground</code> | <code>A.Neutral.900</code> #1A1916 | <code>A.Neutral.50</code> #FBFAF6 |  |
+| <code>TitleBar.Button.Background</code> | <code>A.Transparent</code> #00000000 | <code>A.Transparent</code> #00000000 |  |
+| <code>TitleBar.Button.Background.Hover</code> | <code>A.Black.A04</code> #0A000000 | <code>A.White.A08</code> #14FFFFFF |  |
+| <code>TitleBar.Button.Background.Pressed</code> | <code>A.Black.A08</code> #14000000 | <code>A.White.A12</code> #1FFFFFFF |  |
+| <code>TitleBar.Button.Foreground</code> | <code>A.Neutral.650</code> #5F5C56 | <code>A.Neutral.400</code> #B2AFA7 |  |
 
 #### PrimaryNav
 
@@ -645,12 +658,14 @@
 | <code>Funzor/Views/Pages/PlaceholderPage.xaml</code> | Foundation, Content, Page, Card, Button, Form, Setting, Status, Dialog, ContextMenu, Tooltip, EmptyState |
 | <code>Funzor/Views/Shell/NavigationRail.xaml</code> | PrimaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/SectionPanel.xaml</code> | SecondaryNav, Foundation, Tooltip |
-| <code>Funzor/Themes/Controls.xaml</code> | Foundation, PrimaryNav, SecondaryNav, Content, Page, Card, Button, Form, Setting, Status, Dialog, ContextMenu, Tooltip, EmptyState |
+| <code>Funzor/Views/Shell/TitleBar.xaml</code> | TitleBar, Foundation, Tooltip |
+| <code>Funzor/Themes/Controls.xaml</code> | Foundation, TitleBar, PrimaryNav, SecondaryNav, Content, Page, Card, Button, Form, Setting, Status, Dialog, ContextMenu, Tooltip, EmptyState |
 
 ### 3.1 区域映射规则
 
 | 路径前缀 | 允许区域 |
 | --- | --- |
+| <code>Funzor/Views/Shell/TitleBar.xaml</code> | TitleBar, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/NavigationRail.xaml</code> | PrimaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/SectionPanel.xaml</code> | SecondaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/MainWindow.xaml</code> | Foundation, Content |
@@ -693,16 +708,20 @@
 | 模板 | TargetType |
 | --- | --- |
 | <code>Icon.Settings</code> | ContentControl |
+| <code>Icon.Minimize</code> | ContentControl |
+| <code>Icon.Close</code> | ContentControl |
 
 源文件:
 
-- <code>Funzor/Assets/Icons/Source/settings_20_regular.svg</code>
+- <code>Funzor/Assets/Icons/Source/close_256_regular.svg</code>
+- <code>Funzor/Assets/Icons/Source/minimize_256_regular.svg</code>
+- <code>Funzor/Assets/Icons/Source/settings_256_regular.svg</code>
 
 ## 7. 校验清单
 
 区域顺序 (<code>RegionManifest</code>):
 
-    Foundation -> PrimaryNav -> SecondaryNav -> Content -> Page -> Card -> Button -> Form -> Setting -> Status -> Dialog -> ContextMenu -> Tooltip -> EmptyState -> Bridge
+    Foundation -> TitleBar -> PrimaryNav -> SecondaryNav -> Content -> Page -> Card -> Button -> Form -> Setting -> Status -> Dialog -> ContextMenu -> Tooltip -> EmptyState -> Bridge
 
 组件区域 (<code>ComponentRegions</code>):
 

@@ -16,17 +16,34 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <!-- 布局常量: 48 为自定义标题栏高度 -->
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 一级导航仍然占满窗口高度: 标题栏只覆盖第 1-2 列 -->
         <shell:NavigationRail
             x:Name="Rail"
+            Grid.RowSpan="2"
+            Grid.Column="0"
             SectionSelected="Rail_SectionSelected" />
+
+        <shell:TitleBar
+            x:Name="TitleBar"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2" />
 
         <shell:SectionPanel
             x:Name="Panel"
+            Grid.Row="1"
             Grid.Column="1"
             EntrySelected="Panel_EntrySelected" />
 
         <Frame
             x:Name="ContentFrame"
+            Grid.Row="1"
             Grid.Column="2"
             Background="{ThemeResource Content.Background}" />
 

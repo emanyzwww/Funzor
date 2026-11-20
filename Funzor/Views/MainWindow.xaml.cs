@@ -1,4 +1,5 @@
 using Funzor.Navigation;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Animation;
 
@@ -14,12 +15,56 @@ namespace Funzor.Views
 		{
 			InitializeComponent();
 
+			ConfigureWindowChrome();
+			TitleBar.Attach(AppWindow.Id);
+			TitleBar.MinimizeRequested += TitleBar_MinimizeRequested;
+			TitleBar.CloseRequested += TitleBar_CloseRequested;
+			AppWindow.Changed += AppWindow_Changed;
+
 			// App.OnLaunched 已先完成本地化初始化, 这里可以安全读取文案
 			_sections = NavigationCatalog.Build();
 			Rail.SetSections(_sections);
 
 			ActivateSection(_sections[0]);
 		}
+
+		private void ConfigureWindowChrome()
+		{
+			// 让 XAML 内容覆盖整个窗口, 然后在 presenter 层移除系统标题栏和 caption buttons.
+			ExtendsContentIntoTitleBar = true;
+
+			if (AppWindow.Presenter is not OverlappedPresenter presenter)
+			{
+				return;
+			}
+
+			presenter.SetBorderAndTitleBar(true, false);
+			presenter.IsMinimizable = true;
+			presenter.IsMaximizable = false;
+			presenter.IsResizable = true;
+		}
+
+		private void AppWindow_Changed(AppWindow sender, AppWindowChangedEventArgs args)
+		{
+			// 兜底: 某些系统手势仍可能尝试最大化; 本应用不提供最大化/全屏.
+			if (args.DidSizeChange &&
+			    sender.Presenter is OverlappedPresenter presenter &&
+			    presenter.State == OverlappedPresenterState.Maximized)
+			{
+				presenter.Restore();
+			}
+		}
+
+		private void TitleBar_MinimizeRequested(object? sender, EventArgs e)
+		{
+			if (AppWindow.Presenter is OverlappedPresenter presenter)
+			{
+				presenter.Minimize();
+			}
+		}
+
+		private void TitleBar_CloseRequested(object? sender, EventArgs e)
+			=> Close();
 
 		private void Rail_SectionSelected(object? sender, NavSection section)
 			=> ActivateSection(section);

@@ -129,6 +129,12 @@
   <data name="NoUpdateTitle" xml:space="preserve">
     <value>检查更新</value>
   </data>
+  <data name="TitleBar.Minimize" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="TitleBar.Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
   <data name="UpdateCheckButton.Content" xml:space="preserve">
     <value>检查更新</value>
   </data>

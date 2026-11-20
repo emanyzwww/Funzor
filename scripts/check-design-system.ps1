@@ -54,7 +54,7 @@ foreach ($required in @($ThemeLightPath, $ThemeDarkPath, $TokensPath)) {
 }
 
 $RegionManifest = @(
-    "Foundation", "PrimaryNav", "SecondaryNav", "Content", "Page", "Card",
+    "Foundation", "TitleBar", "PrimaryNav", "SecondaryNav", "Content", "Page", "Card",
     "Button", "Form", "Setting", "Status", "Dialog", "ContextMenu", "Tooltip",
     "EmptyState", "Bridge"
 )
@@ -86,6 +86,7 @@ $WinUIThemeResourceAllow = @(
 
 # 视图 -> 允许的区域. 新增视图时在这里加一行, 不要放宽默认规则.
 $ViewRegionMap = @(
+    @{ Prefix = "Funzor/Views/Shell/TitleBar.xaml"; Regions = @("TitleBar", "Foundation", "Tooltip") },
     @{ Prefix = "Funzor/Views/Shell/NavigationRail.xaml"; Regions = @("PrimaryNav", "Foundation", "Tooltip") },
     @{ Prefix = "Funzor/Views/Shell/SectionPanel.xaml"; Regions = @("SecondaryNav", "Foundation", "Tooltip") },
     @{ Prefix = "Funzor/Views/MainWindow.xaml"; Regions = @("Foundation", "Content") },

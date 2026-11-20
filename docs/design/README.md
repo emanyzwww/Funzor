@@ -21,7 +21,7 @@ Tokens.xaml                        色阶, 间距, 尺寸, 字号, 圆角, 动�
 ```
 
 - **原子层**: `Tokens.xaml` 只定义值, 颜色按色相命名, 度量按类型和档位命名.
-- **语义层**: 两个主题文件按 15 个固定区域定义用途, 键集合与顺序必须一致.
+- **语义层**: 两个主题文件按 16 个固定区域定义用途, 键集合与顺序必须一致.
 - **使用层**: 视图和 `Controls.xaml` 只引用本区域语义键和度量 token, 不写颜色字面量.
 - **桥接**: `Bridge` 区块把 WinUI 原生键映射回区域键, 让原生控件跟随主题; `Icons.xaml` 提供图标模板.
 
@@ -59,7 +59,7 @@ pwsh scripts/gen-design-reference.ps1 -Check
 
 ## 当前状态
 
-外壳和基础样式已经落地: 三栏导航, 5 个排版样式, 主/次按钮样式, 图标模板. `Card`, `Form`, `Setting`, `Status`, `Dialog`,
+外壳和基础样式已经落地: 顶部 48px 自定义标题栏 (应用名 + 最小化/关闭), 三栏导航, 5 个排版样式, 主/次按钮样式, 图标模板. `Card`, `Form`, `Setting`, `Status`, `Dialog`,
 `ContextMenu`, `Tooltip`, `EmptyState` 等区域已有语义键, 但组件尚未实现,
 预留项见[组件与用法](components.md#10-预留与未实现清单).
 

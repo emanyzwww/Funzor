@@ -192,9 +192,9 @@ Get-ChildItem Funzor, scripts, docs -Recurse -File -Include *.xaml, *.cs, *.ps1,
 
 ### 4.11 新增图标
 
-1. 准备 20×20 的 SVG, 放到 `Funzor/Assets/Icons/Source/`, 命名用 `{名称}_20_regular.svg`;
-2. 在 `Icons.xaml` 新增 `Icon.{名称}` 的 `ControlTemplate`, `Viewbox` 20×20, `Path.Data` 使用 SVG path, `Fill` 用
-   `TemplateBinding Foreground`;
+1. 准备 256 viewBox 的 SVG, 放到 `Funzor/Assets/Icons/Source/`, 命名用 `{名称}_256_regular.svg`;
+2. 在 `Icons.xaml` 新增 `Icon.{名称}` 的 `ControlTemplate`, 内部使用 256×256 坐标空间; fill 图标用 `Fill`,
+   stroke 图标用 `Stroke`, 颜色都用 `TemplateBinding Foreground`;
 3. 需要导航入口时, 把 key 写进 `NavigationCatalog`;
 4. 构建并运行, 切换 Light/Dark, 确认未选中/选中/悬停颜色正确;
 5. 图标 key 不存在时转换器返回 `null`, 图标静默空白, 不会报错; 因此必须肉眼确认;
@@ -232,6 +232,7 @@ Get-ChildItem Funzor, scripts, docs -Recurse -File -Include *.xaml, *.cs, *.ps1,
 | 缩放         | 100% / 150% / 200%                                           | 布局改动              | 不裁切, 不重叠                                 |
 | 长文本与空态 | 中文长标题, 空列表, 禁用态                                   | 页面改动              | 省略, 换行, 禁用可辨认                         |
 | 高对比度     | Windows 高对比度主题                                         | 主题改动              | 已知缺口: 会回退深色; 记录实际表现, 不假装通过 |
+| 标题栏       | 拖动空白区, 点两个按钮, 双击标题栏, 缩放窗口                 | 外壳改动              | 可拖动; 两个按钮正确; 双击不最大化; 边框可缩放 |
 | 图标         | 逐个看导航图标                                               | 图标改动              | 无空白, 颜色跟随状态                           |
 
 ## 7. CI 与失败处理

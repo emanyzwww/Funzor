@@ -49,6 +49,20 @@
     <SolidColorBrush x:Key="Foundation.Selection.Background" Color="{StaticResource A.Neutral.750}" />
 
     <!-- ============================================================
+         TitleBar - 标题栏
+         Owner: Views/Shell/TitleBar.xaml
+         允许: A.*
+         禁止: 其他区域键
+         ============================================================ -->
+    <SolidColorBrush x:Key="TitleBar.Background" Color="{StaticResource A.Neutral.875}" />
+    <SolidColorBrush x:Key="TitleBar.Separator" Color="{StaticResource A.Neutral.800}" />
+    <SolidColorBrush x:Key="TitleBar.Title.Foreground" Color="{StaticResource A.Neutral.50}" />
+    <SolidColorBrush x:Key="TitleBar.Button.Background" Color="{StaticResource A.Transparent}" />
+    <SolidColorBrush x:Key="TitleBar.Button.Background.Hover" Color="{StaticResource A.White.A08}" />
+    <SolidColorBrush x:Key="TitleBar.Button.Background.Pressed" Color="{StaticResource A.White.A12}" />
+    <SolidColorBrush x:Key="TitleBar.Button.Foreground" Color="{StaticResource A.Neutral.400}" />
+
+    <!-- ============================================================
          PrimaryNav - 一级导航
          Owner: Views/Shell/NavigationRail.xaml
          允许: A.*

@@ -22,6 +22,7 @@
 | 区域           | Owner                             | 覆盖内容                                          |
 |----------------|-----------------------------------|---------------------------------------------------|
 | `Foundation`   | 所有视图与原生控件                | 画布, 表面, 正文, 边框, 焦点, 滚动, 强调, 选区    |
+| `TitleBar`     | `Views/Shell/TitleBar.xaml`       | 标题栏背景, 分隔线, 标题文字, 图标按钮            |
 | `PrimaryNav`   | `Views/Shell/NavigationRail.xaml` | 一级导航背景, 条目, 选中, 徽标, 滚动, 提示        |
 | `SecondaryNav` | `Views/Shell/SectionPanel.xaml`   | 二级菜单背景, 分组, 条目, 选中, 徽标, 滚动, 提示  |
 | `Content`      | `Views/MainWindow.xaml`, 页面     | 内容区背景                                        |
@@ -40,7 +41,7 @@
 区域顺序是固定的, 定义在 `scripts/check-design-system.ps1` 的 `RegionManifest` 中:
 
 ```
-Foundation → PrimaryNav → SecondaryNav → Content → Page → Card → Button →
+Foundation → TitleBar → PrimaryNav → SecondaryNav → Content → Page → Card → Button →
 Form → Setting → Status → Dialog → ContextMenu → Tooltip → EmptyState → Bridge
 ```
 
@@ -123,7 +124,7 @@ Setting.Row.Background.Hover
 两个主题文件结构完全同构:
 
 1. 文件头注释说明主题方向和基本规则;
-2. 按 `RegionManifest` 的顺序排列 15 个区块;
+2. 按 `RegionManifest` 的顺序排列 16 个区块;
 3. 每个区块内先写本区域的键, 键的顺序在两个文件中必须一致;
 4. `Bridge` 区块最后, 键的 owner 注释写在行尾.
 
@@ -241,6 +242,7 @@ WinUI 的 `ListViewItem` 模板只认 `ListViewItemBackgroundPointerOver` 这类
 | 视图                                     | 允许的区域                                                                                                                       |
 |------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `Funzor/Views/MainWindow.xaml`           | `Foundation`, `Content`                                                                                                          |
+| `Funzor/Views/Shell/TitleBar.xaml`       | `TitleBar`, `Foundation`, `Tooltip`                                                                                              |
 | `Funzor/Views/Shell/NavigationRail.xaml` | `PrimaryNav`, `Foundation`, `Tooltip`                                                                                            |
 | `Funzor/Views/Shell/SectionPanel.xaml`   | `SecondaryNav`, `Foundation`, `Tooltip`                                                                                          |
 | `Funzor/Views/Pages/` 下所有页面         | `Foundation`, `Content`, `Page`, `Card`, `Button`, `Form`, `Setting`, `Status`, `Dialog`, `ContextMenu`, `Tooltip`, `EmptyState` |
