@@ -57,7 +57,7 @@ internal sealed class UpdateService
 
 		if (string.Equals(ComputeSha256(installerPath), info.Sha256, StringComparison.OrdinalIgnoreCase) is false)
 		{
-			throw new InvalidOperationException("更新包校验失败，已取消安装。");
+			throw new InvalidOperationException("更新包校验失败, 已取消安装.");
 		}
 
 		// 主程序以管理员身份运行, 安装程序继承已提权令牌, 不会再弹 UAC

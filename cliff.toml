@@ -1,5 +1,5 @@
 # git-cliff 配置: 只负责按提交类型分组
-# 版本标题、摘要、贡献者由 scripts/build-release-notes.ps1 合成
+# 版本标题, 摘要, 贡献者由 scripts/build-release-notes.ps1 合成
 # 本地预览: git cliff --latest --strip header
 
 [changelog]
