@@ -28,6 +28,10 @@ jobs:
         shell: pwsh
         run: ./scripts/check-design-system.ps1 -RepoRoot . -Format Text
 
+      - name: Check design reference
+        shell: pwsh
+        run: ./scripts/gen-design-reference.ps1 -RepoRoot . -Check
+
       - name: Build
         shell: pwsh
         run: dotnet build Funzor/Funzor.csproj -c Debug -p:Platform=x64 -nologo
