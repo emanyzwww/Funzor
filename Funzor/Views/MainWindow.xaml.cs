@@ -1,80 +1,72 @@
-using Funzor.Models;
-using Funzor.Services;
+using Funzor.Navigation;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using WinUI3Localizer;
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Funzor.Views
 {
 	public sealed partial class MainWindow : Window
 	{
-		private readonly UpdateService _updateService = new();
+		private IReadOnlyList<NavSection> _sections = [];
+		private NavSection? _currentSection;
+		private NavEntry? _currentEntry;
 
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			// App.OnLaunched 已先完成本地化初始化, 这里可以安全读取文案
+			_sections = NavigationCatalog.Build();
+			Rail.SetSections(_sections);
+
+			ActivateSection(_sections[0]);
 		}
 
-		private async void UpdateCheckButton_Click(object sender, RoutedEventArgs e)
+		private void Rail_SectionSelected(object? sender, NavSection section)
+			=> ActivateSection(section);
+
+		private void Panel_EntrySelected(object? sender, NavEntry entry)
+			=> ActivateEntry(entry);
+
+		private void ActivateSection(NavSection section)
 		{
-			UpdateCheckButton.IsEnabled = false;
-			try
+			if (_currentSection?.Id == section.Id)
 			{
-				UpdateInfo? latest = await _updateService.GetLatestAsync();
-
-				if (latest is null ||
-				    Version.TryParse(latest.Version, out Version? latestVersion) is false ||
-				    latestVersion <= _updateService.CurrentVersion)
-				{
-					await ShowMessageAsync("NoUpdateTitle", "NoUpdateMessage");
-					return;
-				}
-
-				ProgressBar progressBar = new() { Minimum = 0, Maximum = 100 };
-				ContentDialog progressDialog = new()
-				{
-					XamlRoot = Content.XamlRoot,
-					Title = Localizer.Get().GetLocalizedString("NoUpdateTitle"),
-					Content = progressBar,
-				};
-
-				var showOperation = progressDialog.ShowAsync();
-				try
-				{
-					await _updateService.DownloadAndRunInstallerAsync(
-						latest,
-						new Progress<double>(value => progressBar.Value = value * 100));
-				}
-				finally
-				{
-					progressDialog.Hide();
-					await showOperation;
-				}
-
-				// 安装程序已在运行, 退出以释放文件占用
-				Application.Current.Exit();
+				return;
 			}
-			catch (Exception exception)
+
+			_currentSection = section;
+			Rail.SelectSection(section.Id);
+			Panel.SetEntries(section.Title, section.Entries);
+
+			NavEntry? first = section.Entries.FirstOrDefault();
+			if (first is null)
 			{
-				await ShowMessageAsync("NoUpdateTitle", null, $"更新失败：{exception.Message}");
+				_currentEntry = null;
+				ContentFrame.Content = null;
+				return;
 			}
-			finally
-			{
-				UpdateCheckButton.IsEnabled = true;
-			}
+
+			ActivateEntry(first);
 		}
 
-		private Task ShowMessageAsync(string titleKey, string? messageKey, string? message = null)
+		private void ActivateEntry(NavEntry entry)
 		{
-			ILocalizer localizer = Localizer.Get();
-			ContentDialog dialog = new()
+			if (_currentEntry?.Id == entry.Id &&
+			    ContentFrame.CurrentSourcePageType == entry.PageType)
 			{
-				XamlRoot = Content.XamlRoot,
-				Title = localizer.GetLocalizedString(titleKey),
-				Content = message ?? localizer.GetLocalizedString(messageKey ?? string.Empty),
-				CloseButtonText = "确定",
-			};
-			return dialog.ShowAsync().AsTask();
+				return;
+			}
+
+			_currentEntry = entry;
+			Panel.SelectEntry(entry.Id);
+
+			ContentFrame.Navigate(
+				entry.PageType,
+				entry.Parameter,
+				new SuppressNavigationTransitionInfo());
+
+			// 一级/二级切换不构成"返回"语义
+			ContentFrame.BackStack.Clear();
 		}
 	}
 }
