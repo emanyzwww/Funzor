@@ -1,6 +1,6 @@
 [package]
 name = "funzor"
-version = "0.0.3"
+version = "0.1.1"
 description = "Funzor - Windows 桌面工具"
 authors = ["emanyzwww"]
 edition = "2024"

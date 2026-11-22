@@ -1,16 +1,17 @@
 {
   "name": "funzor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "tauri": "tauri",
-    "tauri:dev": "tauri dev",
+    "dev": "vite",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "fmt:check": "oxfmt --check",
+    "preview": "vite preview",
+    "sync:version": "zx scripts/sync-version.mjs",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
@@ -27,7 +28,8 @@
     "sass-embedded": "^1.108.2",
     "typescript": "~6.0.3",
     "vite": "^8.0.16",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.5",
+    "zx": "^8.8.5"
   },
   "packageManager": "pnpm@11.28.5"
 }
