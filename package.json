@@ -9,6 +9,7 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "preview": "vite preview",
+    "release:notes": "zx scripts/release-notes.mjs",
     "sync:version": "zx scripts/sync-version.mjs",
     "tauri": "tauri",
     "tauri:dev": "tauri dev"
