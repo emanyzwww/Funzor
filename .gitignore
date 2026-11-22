@@ -4,14 +4,9 @@
 !**/.agents/skills/*
 
 # IDEs
-**/.vs/
-*.user
+**/.vscode/
 **/.idea/
-
-# Legacy build artifacts
-**/bin/*
-**/obj/*
-/artifacts/
+**/.openidea/
 
 # Node
 node_modules/

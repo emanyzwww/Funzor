@@ -9,10 +9,8 @@ indent_style = space
 indent_size = 2
 max_line_length = 100
 
-# Rust: 沿用 rustfmt 的 4 空格
 [*.rs]
 indent_size = 4
 
-# Makefile 必须用 tab
 [Makefile]
 indent_style = tab
