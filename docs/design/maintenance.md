@@ -163,7 +163,8 @@ Get-ChildItem Funzor, scripts, docs -Recurse -File -Include *.xaml, *.cs, *.ps1,
 1. 在 `Funzor/Views/` 下创建 XAML, 优先复用现有前缀 (页面放 `Views/Pages/`);
 2. 在 `ViewRegionMap` 加一行, 路径匹配用完整文件或前缀, 区域只列真正需要的;
 3. 颜色只用 `ThemeResource` 引本区域键, 尺寸用度量 token 或布局常量, 不写画刷和颜色字面量;
-4. 如果用了原生列表并需要改状态色, 按[语义层](semantic-layer.md#53-视图别名)的别名模式, 在 Light/Dark 两个字典里写同样的键集合;
+4. 如果用了原生列表并需要不同于平台的圆角与状态色, 在 `Funzor/Controls/` 下加一个组件字典, 里面写**自持的
+   `ControlTemplate`** 并通过样式 key 暴露; 不要试图覆盖 `ListViewItem*` 等平台原生键 (实测无效);
 5. 跑 DR-06 至 DR-11; 重新生成 `reference.md`;
 6. 如果是页面, 更新 `semantic-layer.md` 的视图映射表 (如果新增了路径类别), 并在 `components.md` 里补页面用法说明
    (如果引入了新模式).

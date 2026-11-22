@@ -9,57 +9,15 @@
 
     <UserControl.Resources>
         <!--
-            一级导航是固定深色区域. 局部别名把 WinUI ListViewItem 状态键映射到 PrimaryNav.*.
-            别名只作用于当前 ListView, 不污染其他列表.
+            一级导航的列表项样式 (圆角 / 悬停 / 选中) 由 Controls/Navigation/PrimaryNavList.xaml 自己定义,
+            不覆盖 WinUI 的 ListViewItem* 原生资源. 该字典只合并到本列表.
         -->
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Controls/Navigation/PrimaryNavList.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
             <helpers:ResourceKeyToTemplateConverter x:Key="IconKeyToTemplateConverter" />
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <StaticResource x:Key="ListViewItemBackgroundPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Background.Hover" />
-                    <StaticResource x:Key="ListViewItemBackgroundPressed"
-                                    ResourceKey="PrimaryNav.Item.Background.Pressed" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelected"
-                                    ResourceKey="PrimaryNav.Item.Background.Selected" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Background.Selected" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelectedPressed"
-                                    ResourceKey="PrimaryNav.Item.Background.Pressed" />
-                    <StaticResource x:Key="ListViewItemForeground" ResourceKey="PrimaryNav.Item.Foreground" />
-                    <StaticResource x:Key="ListViewItemForegroundPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Foreground.Hover" />
-                    <StaticResource x:Key="ListViewItemForegroundSelected"
-                                    ResourceKey="PrimaryNav.Item.Foreground.Selected" />
-                    <StaticResource x:Key="ListViewItemFocusVisualPrimaryBrush" ResourceKey="PrimaryNav.Focus.Ring" />
-                    <StaticResource x:Key="ListViewItemFocusVisualSecondaryBrush" ResourceKey="PrimaryNav.Focus.Offset" />
-                    <StaticResource x:Key="ListViewItemFocusBorderBrush" ResourceKey="PrimaryNav.Focus.Ring" />
-                    <CornerRadius x:Key="ListViewItemCornerRadius">8</CornerRadius>
-                    <x:Boolean x:Key="ListViewItemSelectionIndicatorVisualEnabled">False</x:Boolean>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <StaticResource x:Key="ListViewItemBackgroundPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Background.Hover" />
-                    <StaticResource x:Key="ListViewItemBackgroundPressed"
-                                    ResourceKey="PrimaryNav.Item.Background.Pressed" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelected"
-                                    ResourceKey="PrimaryNav.Item.Background.Selected" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Background.Selected" />
-                    <StaticResource x:Key="ListViewItemBackgroundSelectedPressed"
-                                    ResourceKey="PrimaryNav.Item.Background.Pressed" />
-                    <StaticResource x:Key="ListViewItemForeground" ResourceKey="PrimaryNav.Item.Foreground" />
-                    <StaticResource x:Key="ListViewItemForegroundPointerOver"
-                                    ResourceKey="PrimaryNav.Item.Foreground.Hover" />
-                    <StaticResource x:Key="ListViewItemForegroundSelected"
-                                    ResourceKey="PrimaryNav.Item.Foreground.Selected" />
-                    <StaticResource x:Key="ListViewItemFocusVisualPrimaryBrush" ResourceKey="PrimaryNav.Focus.Ring" />
-                    <StaticResource x:Key="ListViewItemFocusVisualSecondaryBrush" ResourceKey="PrimaryNav.Focus.Offset" />
-                    <StaticResource x:Key="ListViewItemFocusBorderBrush" ResourceKey="PrimaryNav.Focus.Ring" />
-                    <CornerRadius x:Key="ListViewItemCornerRadius">8</CornerRadius>
-                    <x:Boolean x:Key="ListViewItemSelectionIndicatorVisualEnabled">False</x:Boolean>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -72,25 +30,11 @@
             SelectionMode="Single"
             IsItemClickEnabled="False"
             HorizontalAlignment="Left"
+            ItemContainerStyle="{StaticResource PrimaryNavItemStyle}"
             ScrollViewer.HorizontalScrollMode="Disabled"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionChanged="SectionList_SelectionChanged"
             ContainerContentChanging="SectionList_ContainerContentChanging">
-
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Width" Value="40" />
-                    <Setter Property="Height" Value="40" />
-                    <Setter Property="MinWidth" Value="0" />
-                    <Setter Property="Margin" Value="8,2" />
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="CornerRadius" Value="8" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="UseSystemFocusVisuals" Value="True" />
-                    <Setter Property="Foreground" Value="{ThemeResource PrimaryNav.Item.Foreground}" />
-                </Style>
-            </ListView.ItemContainerStyle>
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="nav:NavSection">

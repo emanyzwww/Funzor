@@ -47,6 +47,7 @@ $ControlsPath = Join-Path $RepoRoot "Funzor/Themes/Controls.xaml"
 $IconsPath = Join-Path $RepoRoot "Funzor/Themes/Icons.xaml"
 $CheckScriptPath = Join-Path $RepoRoot "scripts/check-design-system.ps1"
 $ViewsRoot = Join-Path $RepoRoot "Funzor/Views"
+$ComponentsRoot = Join-Path $RepoRoot "Funzor/Controls"
 $IconSourceRoot = Join-Path $RepoRoot "Funzor/Assets/Icons/Source"
 
 foreach ($required in @($TokensPath, $LightPath, $DarkPath, $ControlsPath, $IconsPath, $CheckScriptPath)) {
@@ -235,6 +236,11 @@ $productRegions = @($regionManifest | Where-Object { $_ -ne 'Bridge' })
 $viewFiles = @()
 if (Test-Path -LiteralPath $ViewsRoot) {
     $viewFiles = @(Get-ChildItem -Path $ViewsRoot -Recurse -Filter '*.xaml' -File |
+        ForEach-Object { Get-RelativePath $_.FullName } |
+        Sort-Object)
+}
+if (Test-Path -LiteralPath $ComponentsRoot) {
+    $viewFiles += @(Get-ChildItem -Path $ComponentsRoot -Recurse -Filter '*.xaml' -File |
         ForEach-Object { Get-RelativePath $_.FullName } |
         Sort-Object)
 }

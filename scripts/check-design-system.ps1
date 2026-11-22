@@ -45,6 +45,7 @@ $ThemeDarkPath = Join-Path $RepoRoot "Funzor/Themes/Theme.Dark.xaml"
 $TokensPath = Join-Path $RepoRoot "Funzor/Themes/Tokens.xaml"
 $ControlsPath = Join-Path $RepoRoot "Funzor/Themes/Controls.xaml"
 $ViewsPath = Join-Path $RepoRoot "Funzor/Views"
+$ComponentsPath = Join-Path $RepoRoot "Funzor/Controls"
 
 foreach ($required in @($ThemeLightPath, $ThemeDarkPath, $TokensPath)) {
     if (-not (Test-Path -LiteralPath $required)) {
@@ -80,12 +81,15 @@ $WinUIThemeResourceAllow = @(
     "BodyTextBlockStyle", "BodyStrongTextBlockStyle", "BodyLargeTextBlockStyle",
     "BodyLargeStrongTextBlockStyle", "CaptionTextBlockStyle",
     "SubtitleTextBlockStyle", "TitleTextBlockStyle", "TitleLargeTextBlockStyle",
+    "ControlFasterAnimationDuration",
     "DisplayTextBlockStyle", "BaseTextBlockStyle",
     "ApplicationPageBackgroundThemeBrush"
 )
 
 # 视图 -> 允许的区域. 新增视图时在这里加一行, 不要放宽默认规则.
 $ViewRegionMap = @(
+    @{ Prefix = "Funzor/Controls/Navigation/PrimaryNavList.xaml"; Regions = @("PrimaryNav", "Foundation") },
+    @{ Prefix = "Funzor/Controls/Navigation/SecondaryNavList.xaml"; Regions = @("SecondaryNav", "Foundation") },
     @{ Prefix = "Funzor/Views/Shell/TitleBar.xaml"; Regions = @("TitleBar", "Foundation", "Tooltip") },
     @{ Prefix = "Funzor/Views/Shell/NavigationRail.xaml"; Regions = @("PrimaryNav", "Foundation", "Tooltip") },
     @{ Prefix = "Funzor/Views/Shell/SectionPanel.xaml"; Regions = @("SecondaryNav", "Foundation", "Tooltip") },
@@ -400,6 +404,11 @@ if (Test-Path -LiteralPath $ViewsPath) {
 }
 if (Test-Path -LiteralPath $ControlsPath) {
     $viewFiles.Add($ControlsPath)
+}
+if (Test-Path -LiteralPath $ComponentsPath) {
+    foreach ($file in Get-ChildItem -Path $ComponentsPath -Recurse -Filter "*.xaml" -File) {
+        $viewFiles.Add($file.FullName)
+    }
 }
 if ($viewFiles.Count -eq 0) {
     New-Finding -Rule "DR-06" -Severity "warning" -File "Funzor/Views" -Line 0 -Message "没有找到视图 XAML"

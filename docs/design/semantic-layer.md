@@ -205,9 +205,12 @@ WinUI 的 `ListViewItem` 模板只认 `ListViewItemBackgroundPointerOver` 这类
 
 - 只允许 `StaticResource ResourceKey=` 形式的别名, 不允许在视图里定义画刷;
 - 别名目标必须是已存在, 且本视图有权引用的区域键 (DR-09, DR-11);
-- 别名的 Light/Dark 两个字典必须键集合一致, 否则切换主题会缺资源; 脚本**不检查**这条, 靠评审;
+- 平台模板使用的原生键 (如 `ListViewItem*`) **在元素级覆盖无效**: 放进 `ThemeDictionaries` 或写成直接条目都试过, 模板都不采纳.
+  需要不同外观时, 不要覆盖原生键, 改为在 `Funzor/Controls/` 里给该控件写**项目自持的模板**, 圆角和状态色写在模板内; 应用级 `Theme.Light/Dark.xaml` 的 `Bridge` 仍是全局覆盖的正规位置, 且需要 `Default` 兜底;
 - 别名只作用于当前控件, 不要覆盖应用级 `ListViewItem*` 键;
-- 别名只改变状态颜色, 不改变控件结构, 圆角和布局.
+- 别名只改变状态颜色和圆角这类主题资源, 不改变控件结构;
+- 需要复用又需要不同于平台默认的控件外观时, 在 `Funzor/Controls/` 下写**自持模板的样式**, 视图用 `ItemContainerStyle` 之类的
+  属性指向该样式; 视图不重复写模板. 示例见 `Controls/Navigation/PrimaryNavList.xaml`.
 
 ## 6. Bridge (原生控件桥接)
 
@@ -246,6 +249,8 @@ WinUI 的 `ListViewItem` 模板只认 `ListViewItemBackgroundPointerOver` 这类
 | `Funzor/Views/Shell/NavigationRail.xaml` | `PrimaryNav`, `Foundation`, `Tooltip`                                                                                            |
 | `Funzor/Views/Shell/SectionPanel.xaml`   | `SecondaryNav`, `Foundation`, `Tooltip`                                                                                          |
 | `Funzor/Views/Pages/` 下所有页面         | `Foundation`, `Content`, `Page`, `Card`, `Button`, `Form`, `Setting`, `Status`, `Dialog`, `ContextMenu`, `Tooltip`, `EmptyState` |
+| `Funzor/Controls/Navigation/PrimaryNavList.xaml` | `PrimaryNav`, `Foundation`                                                                                              |
+| `Funzor/Controls/Navigation/SecondaryNavList.xaml` | `SecondaryNav`, `Foundation`                                                                                          |
 | `Funzor/Themes/Controls.xaml`            | 所有产品区域                                                                                                                     |
 
 补充:
@@ -253,7 +258,8 @@ WinUI 的 `ListViewItem` 模板只认 `ListViewItemBackgroundPointerOver` 这类
 - `Button`, `Form`, `Status`, `Tooltip` 是组件区域, 任何视图都可以引用, 不受上表限制;
 - 新增视图目录或前缀时, 必须在脚本里加一行, 否则 DR-11 只给警告, 且该视图没有区域权限;
 - 未知视图仍会被检查键存在性和颜色字面量, 但区域权限为空;
-- 页面新增 `Card` 之类的引用, 不需要改脚本, 因为页面前缀已经包含这些区域.
+- 页面新增 `Card` 之类的引用, 不需要改脚本, 因为页面前缀已经包含这些区域;
+- `Funzor/Controls/` 下的资源字典是组件级资源 (类似前端的组件目录), 脚本会一并扫描, 因此新文件同样要登记 `ViewRegionMap`.
 
 ## 8. 规则索引
 

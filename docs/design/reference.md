@@ -15,7 +15,7 @@
 | 语义键 (Light / Dark) | 306 / 306 |
 | 区域 | 16 |
 | 组件区域 | 4 |
-| 受检 XAML 文件 | 6 (含 Controls.xaml) |
+| 受检 XAML 文件 | 8 (含 Controls.xaml) |
 | 控件样式 | 7 |
 | 图标模板 | 3 |
 
@@ -317,8 +317,8 @@
 | --- | --- | --- | --- |
 | <code>PrimaryNav.Background</code> | <code>A.Neutral.925</code> #141310 | <code>A.Neutral.925</code> #141310 |  |
 | <code>PrimaryNav.Item.Background</code> | <code>A.Transparent</code> #00000000 | <code>A.Transparent</code> #00000000 |  |
-| <code>PrimaryNav.Item.Background.Hover</code> | <code>A.White.A08</code> #14FFFFFF | <code>A.White.A08</code> #14FFFFFF |  |
-| <code>PrimaryNav.Item.Background.Pressed</code> | <code>A.White.A12</code> #1FFFFFFF | <code>A.White.A12</code> #1FFFFFFF |  |
+| <code>PrimaryNav.Item.Background.Hover</code> | <code>A.White.A12</code> #1FFFFFFF | <code>A.White.A12</code> #1FFFFFFF |  |
+| <code>PrimaryNav.Item.Background.Pressed</code> | <code>A.White.A16</code> #29FFFFFF | <code>A.White.A16</code> #29FFFFFF |  |
 | <code>PrimaryNav.Item.Background.Selected</code> | <code>A.White.A16</code> #29FFFFFF | <code>A.White.A16</code> #29FFFFFF |  |
 | <code>PrimaryNav.Item.Foreground</code> | <code>A.Neutral.400</code> #B2AFA7 | <code>A.Neutral.400</code> #B2AFA7 |  |
 | <code>PrimaryNav.Item.Foreground.Hover</code> | <code>A.Neutral.300</code> #D3D0C9 | <code>A.Neutral.300</code> #D3D0C9 |  |
@@ -347,8 +347,8 @@
 | <code>SecondaryNav.Header.Foreground</code> | <code>A.Neutral.900</code> #1A1916 | <code>A.Neutral.50</code> #FBFAF6 |  |
 | <code>SecondaryNav.Header.Separator</code> | <code>A.Neutral.250</code> #DFDCD5 | <code>A.Neutral.700</code> #4F4D47 | reserved |
 | <code>SecondaryNav.Item.Background</code> | <code>A.Transparent</code> #00000000 | <code>A.Transparent</code> #00000000 |  |
-| <code>SecondaryNav.Item.Background.Hover</code> | <code>A.Black.A04</code> #0A000000 | <code>A.White.A08</code> #14FFFFFF |  |
-| <code>SecondaryNav.Item.Background.Pressed</code> | <code>A.Black.A08</code> #14000000 | <code>A.White.A12</code> #1FFFFFFF |  |
+| <code>SecondaryNav.Item.Background.Hover</code> | <code>A.Black.A08</code> #14000000 | <code>A.White.A12</code> #1FFFFFFF |  |
+| <code>SecondaryNav.Item.Background.Pressed</code> | <code>A.Black.A12</code> #1F000000 | <code>A.White.A16</code> #29FFFFFF |  |
 | <code>SecondaryNav.Item.Background.Selected</code> | <code>A.Neutral.0</code> #FFFFFF | <code>A.Neutral.800</code> #32312C |  |
 | <code>SecondaryNav.Item.Foreground</code> | <code>A.Neutral.650</code> #5F5C56 | <code>A.Neutral.400</code> #B2AFA7 |  |
 | <code>SecondaryNav.Item.Foreground.Hover</code> | <code>A.Neutral.900</code> #1A1916 | <code>A.Neutral.50</code> #FBFAF6 |  |
@@ -659,12 +659,16 @@
 | <code>Funzor/Views/Shell/NavigationRail.xaml</code> | PrimaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/SectionPanel.xaml</code> | SecondaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/TitleBar.xaml</code> | TitleBar, Foundation, Tooltip |
+| <code>Funzor/Controls/Navigation/PrimaryNavList.xaml</code> | PrimaryNav, Foundation |
+| <code>Funzor/Controls/Navigation/SecondaryNavList.xaml</code> | SecondaryNav, Foundation |
 | <code>Funzor/Themes/Controls.xaml</code> | Foundation, TitleBar, PrimaryNav, SecondaryNav, Content, Page, Card, Button, Form, Setting, Status, Dialog, ContextMenu, Tooltip, EmptyState |
 
 ### 3.1 区域映射规则
 
 | 路径前缀 | 允许区域 |
 | --- | --- |
+| <code>Funzor/Controls/Navigation/PrimaryNavList.xaml</code> | PrimaryNav, Foundation |
+| <code>Funzor/Controls/Navigation/SecondaryNavList.xaml</code> | SecondaryNav, Foundation |
 | <code>Funzor/Views/Shell/TitleBar.xaml</code> | TitleBar, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/NavigationRail.xaml</code> | PrimaryNav, Foundation, Tooltip |
 | <code>Funzor/Views/Shell/SectionPanel.xaml</code> | SecondaryNav, Foundation, Tooltip |
@@ -687,6 +691,7 @@
 | <code>SubtitleTextBlockStyle</code> |
 | <code>TitleTextBlockStyle</code> |
 | <code>TitleLargeTextBlockStyle</code> |
+| <code>ControlFasterAnimationDuration</code> |
 | <code>DisplayTextBlockStyle</code> |
 | <code>BaseTextBlockStyle</code> |
 | <code>ApplicationPageBackgroundThemeBrush</code> |

@@ -70,8 +70,8 @@
          ============================================================ -->
     <SolidColorBrush x:Key="PrimaryNav.Background" Color="{StaticResource A.Neutral.925}" />
     <SolidColorBrush x:Key="PrimaryNav.Item.Background" Color="{StaticResource A.Transparent}" />
-    <SolidColorBrush x:Key="PrimaryNav.Item.Background.Hover" Color="{StaticResource A.White.A08}" />
-    <SolidColorBrush x:Key="PrimaryNav.Item.Background.Pressed" Color="{StaticResource A.White.A12}" />
+    <SolidColorBrush x:Key="PrimaryNav.Item.Background.Hover" Color="{StaticResource A.White.A12}" />
+    <SolidColorBrush x:Key="PrimaryNav.Item.Background.Pressed" Color="{StaticResource A.White.A16}" />
     <SolidColorBrush x:Key="PrimaryNav.Item.Background.Selected" Color="{StaticResource A.White.A16}" />
     <SolidColorBrush x:Key="PrimaryNav.Item.Foreground" Color="{StaticResource A.Neutral.400}" />
     <SolidColorBrush x:Key="PrimaryNav.Item.Foreground.Hover" Color="{StaticResource A.Neutral.300}" />
@@ -102,8 +102,8 @@
     <SolidColorBrush x:Key="SecondaryNav.Header.Foreground" Color="{StaticResource A.Neutral.900}" />
     <SolidColorBrush x:Key="SecondaryNav.Header.Separator" Color="{StaticResource A.Neutral.250}" /> <!-- reserved -->
     <SolidColorBrush x:Key="SecondaryNav.Item.Background" Color="{StaticResource A.Transparent}" />
-    <SolidColorBrush x:Key="SecondaryNav.Item.Background.Hover" Color="{StaticResource A.Black.A04}" />
-    <SolidColorBrush x:Key="SecondaryNav.Item.Background.Pressed" Color="{StaticResource A.Black.A08}" />
+    <SolidColorBrush x:Key="SecondaryNav.Item.Background.Hover" Color="{StaticResource A.Black.A08}" />
+    <SolidColorBrush x:Key="SecondaryNav.Item.Background.Pressed" Color="{StaticResource A.Black.A12}" />
     <SolidColorBrush x:Key="SecondaryNav.Item.Background.Selected" Color="{StaticResource A.Neutral.0}" />
     <SolidColorBrush x:Key="SecondaryNav.Item.Foreground" Color="{StaticResource A.Neutral.650}" />
     <SolidColorBrush x:Key="SecondaryNav.Item.Foreground.Hover" Color="{StaticResource A.Neutral.900}" />

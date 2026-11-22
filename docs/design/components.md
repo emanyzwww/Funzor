@@ -92,6 +92,9 @@
 
 - `ListView` 宽 56, `Padding` 0,8,0,8;
 - 条目 40×40, `Margin` 8,2, 圆角 8;
+- 条目尺寸显式写全 `Width` / `Height` / `MinWidth=0` / `MinHeight=0`;WinUI 的 `ListViewItemMinWidth` (88) 与
+  `ListViewItemMinHeight` (40) 是原生默认值, 不覆盖就会把条目拉成非正方形;
+- 条目外观来自 `PrimaryNavItemStyle` (自持模板), 视图不再写 `ItemContainerStyle`;
 - 图标 20×20, 颜色跟随条目 `Foreground`;
 - 单选, 隐藏选择指示条; 选中只改变背景和前景;
 - 每个条目有 ToolTip 和 `AutomationProperties.Name`.
@@ -102,7 +105,26 @@
 - 标题行高 56, 标题 `Margin` 16,0, 使用 `BodyStrongTextBlockStyle` + `SecondaryNav.Header.Foreground`;
 - 列表 `Padding` 0,4,0,8;
 - 条目最小高 36, `Margin` 8,1, `Padding` 12,0, 圆角 6;
-- 文本单行, 超出用省略号.
+- 条目显式写 `MinWidth=0`, 覆盖原生 `ListViewItemMinWidth` (88);
+- 文本单行, 超出用省略号;
+- 条目外观来自 `SecondaryNavItemStyle` (自持模板).
+
+导航列表的列表项外观由 `Funzor/Controls/` 下的组件字典自己定义:
+
+| 字典 | 样式 key | 使用方 | 圆角 |
+| --- | --- | --- | --- |
+| `Controls/Navigation/PrimaryNavList.xaml` | `PrimaryNavItemStyle` | `NavigationRail` | 8 |
+| `Controls/Navigation/SecondaryNavList.xaml` | `SecondaryNavItemStyle` | `SectionPanel` | 6 |
+
+约定:
+
+- 列表项模板由项目自己拥有: `ControlTemplate` 里是 `Border` 底层 + `ContentPresenter`, 圆角和三种状态色都写在模板内,
+  颜色直接引用 `PrimaryNav.*` / `SecondaryNav.*`;
+- 状态通过 `VisualStateManager` 的 `CommonStates` 驱动: `Normal` / `PointerOver` / `Pressed` / `Selected` /
+  `PointerOverSelected` / `PressedSelected`, 每种状态只改图层 `Opacity`, 动画时长用 `ControlFasterAnimationDuration`;
+- **不要试图覆盖 WinUI 的 `ListViewItem*` 原生键**: 放进 `ThemeDictionaries` 或写成直接条目都实测无效, 平台模板不采纳;
+- 组件字典只合并到目标列表, 不进入应用级资源, 避免污染内容区的其他列表;
+- 新增同类列表时, 在 `Funzor/Controls/` 下加字典 + 样式, 视图只引用样式 key.
 
 交互约定: 当前一级与二级状态只由 `MainWindow` 持有; 子控件的 `SelectSection` / `SelectEntry` 是静默的, 事件只上报用户意图.
 切换一级时默认选中该区第一项; 一级/二级切换不写入返回栈.
