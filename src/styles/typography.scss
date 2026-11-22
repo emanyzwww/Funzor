@@ -1,0 +1,50 @@
+//
+// 排版 class: 页面标题 / 描述 / 小节标题 / 正文 / 强调 / 辅助说明.
+//
+.text-page-title {
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-32);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.text-page-description {
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-20);
+  font-weight: 400;
+  white-space: normal;
+  color: var(--text-secondary);
+}
+
+.text-section-title {
+  font-size: var(--font-size-20);
+  line-height: var(--line-height-28);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.text-body {
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-20);
+  font-weight: 400;
+  white-space: normal;
+  color: var(--text-primary);
+}
+
+.text-body-strong {
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-20);
+  font-weight: 600;
+  white-space: normal;
+  color: var(--text-primary);
+}
+
+.text-caption {
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-16);
+  font-weight: 400;
+  white-space: normal;
+  color: var(--text-secondary);
+}

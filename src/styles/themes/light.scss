@@ -1,0 +1,87 @@
+//
+// 明亮语义: 消费色阶, 定义 浅色状态下的具体值.
+// 组件只引用这里的语义变量, 切换 data-theme 自动生效.
+//
+@use "sass:color";
+@use "../helpers" as h;
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  // 画布与表面
+  --bg-canvas: #{h.neutral(0)};
+  --bg-desktop: #{h.neutral(200)};
+  --bg-titlebar: #{h.neutral(50)};
+  --bg-nav: #{h.neutral(925)};
+  --bg-panel: #{h.neutral(100)};
+  --bg-panel-item-selected: #{h.neutral(0)};
+  --bg-dialog: #{h.neutral(0)};
+
+  // 文本
+  --text-primary: #{h.neutral(900)};
+  --text-secondary: #{h.neutral(650)};
+  --text-disabled: #{h.neutral(450)};
+  --text-link: #{h.blue(600)};
+  --text-link-hover: #{h.blue(700)};
+  --text-emphasis: #{h.coral(700)};
+  --text-nav: #{h.neutral(400)};
+  --text-nav-hover: #{h.neutral(300)};
+  --text-nav-selected: #{h.neutral(100)};
+  --text-nav-disabled: #{h.neutral(700)};
+
+  // 边框
+  --border-default: #{h.neutral(250)};
+  --border-subtle: #{h.neutral(200)};
+  --border-strong: #{h.neutral(300)};
+  --border-disabled: #{h.neutral(200)};
+  --border-dialog: #{h.neutral(250)};
+  --dialog-separator: #{h.neutral(250)};
+
+  // 强调 (主按钮 / 进度 / 选中)
+  --accent-bg: #{h.neutral(900)};
+  --accent-bg-hover: #{h.neutral(750)};
+  --accent-bg-pressed: #{h.neutral(700)};
+  --accent-bg-disabled: #{h.neutral(200)};
+  --accent-fg: #{h.neutral(0)};
+  --accent-fg-disabled: #{h.neutral(450)};
+
+  // 次按钮
+  --btn-bg: transparent;
+  --btn-bg-hover: #{color.change(black, $alpha: 0.04)};
+  --btn-bg-pressed: #{color.change(black, $alpha: 0.08)};
+  --btn-bg-disabled: #{h.neutral(200)};
+  --btn-fg-disabled: #{h.neutral(450)};
+  --btn-border: #{h.neutral(500)};
+  --btn-border-hover: #{h.neutral(300)};
+  --btn-border-disabled: #{h.neutral(200)};
+
+  // 反馈
+  --focus-ring: #{h.blue(500)};
+  --focus-ring-nav: #{h.blue(300)};
+  --focus-offset: #{h.neutral(0)};
+  --scrim: #{color.change(black, $alpha: 0.4)};
+  --selection-bg: #{h.neutral(225)};
+  --track-bg: #{h.neutral(200)};
+
+  // 滚动条
+  --scroll-thumb: #{color.change(black, $alpha: 0.24)};
+  --scroll-thumb-hover: #{color.change(black, $alpha: 0.4)};
+  --scroll-thumb-pressed: #{color.change(black, $alpha: 0.64)};
+  --scroll-thumb-nav: #{color.change(white, $alpha: 0.24)};
+  --scroll-thumb-nav-hover: #{color.change(white, $alpha: 0.4)};
+  --scroll-thumb-nav-pressed: #{color.change(white, $alpha: 0.64)};
+
+  // 状态层 (叠在任意底上, 一套样式自适应明暗)
+  --state-hover: #{color.change(black, $alpha: 0.04)};
+  --state-pressed: #{color.change(black, $alpha: 0.08)};
+  --panel-item-hover: #{color.change(black, $alpha: 0.08)};
+  --panel-item-pressed: #{color.change(black, $alpha: 0.12)};
+  --nav-item-hover: #{color.change(white, $alpha: 0.12)};
+  --nav-item-pressed: #{color.change(white, $alpha: 0.16)};
+  --nav-item-selected: #{color.change(white, $alpha: 0.16)};
+
+  // Tooltip (导航)
+  --tooltip-bg: #{h.neutral(100)};
+  --tooltip-fg: #{h.neutral(900)};
+  --tooltip-border: #{h.neutral(250)};
+}

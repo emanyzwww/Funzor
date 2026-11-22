@@ -1,0 +1,46 @@
+//
+// 原子 token: 只定义值, 不定义用途.
+// 组件可以直接引用这里的变量.
+//
+@use "sass:color";
+@use "sass:math";
+@use "palette" as p;
+
+:root {
+  // 色阶
+  @each $name, $shades in p.$hues {
+    @each $step, $value in $shades {
+      --color-#{$name}-#{$step}: #{$value};
+    }
+  }
+
+  // 透明叠加层
+  @each $stop in p.$alpha-stops {
+    --color-white-alpha-#{$stop}: #{color.change(white, $alpha: math.div($stop, 100))};
+    --color-black-alpha-#{$stop}: #{color.change(black, $alpha: math.div($stop, 100))};
+  }
+
+  // 间距
+  @each $v in p.$space {
+    --space-#{$v}: #{$v}px;
+  }
+
+  // 圆角
+  @each $v in p.$radius {
+    --radius-#{$v}: #{$v}px;
+  }
+  --radius-full: 9999px;
+
+  // 字号与行高
+  @each $v in p.$font-sizes {
+    --font-size-#{$v}: #{$v}px;
+  }
+  @each $v in p.$line-heights {
+    --line-height-#{$v}: #{$v}px;
+  }
+
+  // 动效时长
+  @each $v in p.$durations {
+    --duration-#{$v}: #{$v}ms;
+  }
+}

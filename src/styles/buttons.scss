@@ -1,0 +1,53 @@
+//
+// 按钮: 主按钮 (强调) 与次按钮. 规格: 高 32, 内边距 14/0, 圆角 6, 字号 14.
+//
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--space-32);
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-6);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-20);
+  background: transparent;
+}
+
+.btn-primary {
+  background-color: var(--accent-bg);
+  color: var(--accent-fg);
+  font-weight: 600;
+
+  &:hover {
+    background-color: var(--accent-bg-hover);
+  }
+  &:active {
+    background-color: var(--accent-bg-pressed);
+  }
+  &:disabled {
+    background-color: var(--accent-bg-disabled);
+    color: var(--accent-fg-disabled);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--btn-bg);
+  color: var(--text-primary);
+  border-color: var(--btn-border);
+  font-weight: 400;
+
+  &:hover {
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+  }
+  &:active {
+    background-color: var(--btn-bg-pressed);
+    border-color: var(--btn-border-hover);
+  }
+  &:disabled {
+    background-color: var(--btn-bg-disabled);
+    color: var(--btn-fg-disabled);
+    border-color: var(--btn-border-disabled);
+  }
+}

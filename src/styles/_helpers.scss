@@ -1,0 +1,22 @@
+// Sass 取值辅助: 从色阶 map 取具体档位.
+@use "sass:map";
+@use "palette" as p;
+
+@function neutral($step) {
+  @return map.get(p.$neutral, $step);
+}
+@function coral($step) {
+  @return map.get(p.$coral, $step);
+}
+@function blue($step) {
+  @return map.get(p.$blue, $step);
+}
+@function green($step) {
+  @return map.get(p.$green, $step);
+}
+@function amber($step) {
+  @return map.get(p.$amber, $step);
+}
+@function red($step) {
+  @return map.get(p.$red, $step);
+}

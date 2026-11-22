@@ -8,8 +8,15 @@
 *.user
 **/.idea/
 
-# Build artifacts
+# Legacy build artifacts
 **/bin/*
 **/obj/*
 /artifacts/
-/installer/Output/
+
+# Node
+node_modules/
+dist/
+
+# Rust / Tauri
+src-tauri/target/
+src-tauri/gen/
